@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // Specify the password without new lines or extra spaces
+    const char* password = "your_password_here";
+
+    // Execute the password as a command
+    char command[256];
+    sprintf(command, "echo -n \"%s\" | crackme2", password);
+    system(command);
+
+    return 0;
+}
+
