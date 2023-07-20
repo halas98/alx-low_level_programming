@@ -1,24 +1,25 @@
-#include <stdarg.h>
 #include <stdio.h>
-#include "variadic_functions.h"
+#include <stdarg.h>
 
-int sum_them_all(const unsigned int n, ...) {
-    if (n == 0) {
-        return 0;
-    }
+/**
+* sum_them_all - sum of all its parameters
+* @n: n args
+* Return: sum or if n == 0, return 0
+*/
+int sum_them_all(const unsigned int n, ...)
+{
+	int sum = 0;
+	unsigned int i;
+	va_list arguments;
 
-    int sum = 0;
-    unsigned int i; // Move the loop counter variable declaration to the top
-
-    va_list args;
-    va_start(args, n);
-
-    for (i = 0; i < n; i++) { // Use a separate line for loop declaration
-        int value = va_arg(args, int);
-        sum += value;
-    }
-
-    va_end(args);
-    return sum;
+	if (n)
+	{
+		va_start(arguments, n);
+		for (i = 0; i < n; i++)
+		{
+			sum += va_arg(arguments, int);
+		}
+		va_end(arguments);
+	}
+	return (sum);
 }
-
