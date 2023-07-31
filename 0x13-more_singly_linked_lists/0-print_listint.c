@@ -2,11 +2,14 @@
 #include "lists.h"
 
 /**
- * print_listint - Prints all the elements of a listint_t list.
- * @h: Pointer to the head of the list.
+ * struct listint_s - singly linked list
+ * @n: integer
+ * @next: points to the next node
  *
- * Return: The number of elements in the list.
+ * Description: singly linked list node structure
+ *
  */
+
 size_t print_listint(const listint_t *h)
 {
     const listint_t *current = h;
