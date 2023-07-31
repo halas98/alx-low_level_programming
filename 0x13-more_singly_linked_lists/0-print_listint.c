@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include "lists.h"
+#include <stdio.h>
 
 /**
  * print_listint - Print elements of a singly linked list.
@@ -13,13 +13,11 @@ size_t print_listint(const listint_t *h)
 	unsigned int cntr = 0;
 
 	tp = h;
-	while (tp != NULL)
+	while (tp)
 	{
 		printf("%d\n", tp->n);
-		tp = tp->next;
 		cntr++;
+		tp = tp->next;
 	}
-
 	return (cntr);
 }
-
