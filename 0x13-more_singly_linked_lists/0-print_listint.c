@@ -3,22 +3,21 @@
 
 /**
  * print_listint - Prints all the elements of a listint_t list.
- * @h: Pointer to the head of the list.
+ * @h: Pointer to the head of the list_t list.
  *
- * Return: The number of nodes in the list.
+ * Return: The number of nodes in the list_t list.
  */
 size_t print_listint(const listint_t *h)
 {
-    const listint_t *current = h;
-    size_t num = 0;
+    size_t nodes = 0;
 
-    while (current != NULL)
+    while (h)
     {
-        printf("%d\n", current->n);
-        current = current->next;
-        num++;
+        nodes++;
+	printf("%d\n", h->n);
+        h = h->next;
     }
 
-    return (num);
+    return (nodes);
 }
 
