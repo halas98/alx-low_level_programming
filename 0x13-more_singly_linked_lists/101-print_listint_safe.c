@@ -1,29 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "lists.h"
 
 /**
- * print_listint_safe - prints a linked list, safely
- * @head: list of type listint_t to print
+ * print_listint_safe - Prints a listint_t linked list safely
+ * @head: Pointer to the head of the linked list
  *
- * Return: number of nodes in the list
+ * Return: The number of nodes in the list
  */
 size_t print_listint_safe(const listint_t *head)
 {
-    size_t num = 0;
-    long int diff;
+	const listint_t *tortoise, *hare;
+	size_t node_count = 0;
 
-    while (head)
-    {
-        diff = head - head->next;
-        num++;
-        printf("[%p] %d\n", (void *)head, head->n);
-        if (diff > 0)
-            head = head->next;
-        else
-        {
-            printf("-> [%p] %d\n", (void *)head->next, head->next->n);
-            break;
-        }
-    }
+	tortoise = head;
+	hare = head;
 
-    return (num);
+	while (tortoise != NULL && hare != NULL && hare->next != NULL)
+	{
+		tortoise = tortoise->next;
+		hare = hare->next->next;
+
+		if (tortoise == hare)
+		{
+			/* Cycle detected, break the loop */
+			printf("[%p] %d\n", (void *)tortoise, tortoise->n);
+			tortoise = tortoise->next;
+			node_count++;
+			while (tortoise != hare)
+			{
+				printf("[%p] %d\n", (void *)tortoise, tortoise->n);
+				tortoise = tortoise->next;
+				node_count++;
+			}
+			printf("-> [%p] %d\n", (void *)tortoise, tortoise->n);
+			break;
+		}
+
+		/* Print the current node's information */
+		printf("[%p] %d\n", (void *)tortoise, tortoise->n);
+		tortoise = tortoise->next;
+		node_count++;
+	}
+
+	return (node_count);
 }
+
