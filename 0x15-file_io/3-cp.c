@@ -5,70 +5,71 @@
 
 #define BUFFER_SIZE 1024
 
-/**
- * main - Entry point.
- * @ac: Argument count.
- * @av: Argument vector.
- * Return: 0 on success.
- */
+int c(const char *a, const char *b);
+
 int main(int ac, char **av)
 {
-	int fd_from, fd_to, read_bytes, write_bytes;
-	char buffer[BUFFER_SIZE];
-
-	if (ac != 3)
-	{
-		dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", av[0]);
-		exit(97);
-	}
-
-	fd_from = open(av[1], O_RDONLY);
-	if (fd_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
-		exit(98);
-	}
-
-	fd_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-		close(fd_from);
-		exit(99);
-	}
-
-	while ((read_bytes = read(fd_from, buffer, BUFFER_SIZE)) > 0)
-	{
-		write_bytes = write(fd_to, buffer, read_bytes);
-		if (write_bytes != read_bytes)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-			close(fd_from);
-			close(fd_to);
-			exit(99);
-		}
-	}
-
-	if (read_bytes == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
-		close(fd_from);
-		close(fd_to);
-		exit(98);
-	}
-
-	if (close(fd_from) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from);
-		exit(100);
-	}
-
-	if (close(fd_to) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to);
-		exit(100);
-	}
-
-	return (0);
+if (ac != 3)
+{
+dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", av[0]);
+exit(97);
 }
+
+if (c(av[1], av[2]) != 0)
+{
+exit(99);
+}
+
+return (0);
+}
+
+int c(const char *a, const char *b)
+{
+int x, y, z, w, r;
+char d[BUFFER_SIZE];
+
+x = open(a, O_RDONLY);
+if (x == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", a);
+return (-1);
+}
+
+y = open(b, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+if (y == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't write to %s\n", b);
+close(x);
+return (-1);
+}
+
+while ((z = read(x, d, BUFFER_SIZE)) > 0)
+{
+w = write(y, d, z);
+if (w != z)
+{
+dprintf(STDERR_FILENO, "Error: Can't write to %s\n", b);
+close(x);
+close(y);
+return (-1);
+}
+}
+
+if (z == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", a);
+close(x);
+close(y);
+return (-1);
+}
+
+if (close(x) == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", x);
+return (-1);
+}
+
+if (close(y) == -1)
+{
+
 
