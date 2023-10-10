@@ -1,12 +1,3 @@
-/*
- * File_Name: 100-sorted_hash_table.c
- * Created: 8th June, 2023
- * Author: David James Taiye (Official0mega)
- * Size_Of_File: Undefined
- * Project_Title: 0x1A-hash_tables
- * Status: Submitted.!
- */
-
 #include "hash_tables.h"
 
 /**
